@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     right: 10,
     bottom: 30,
     marginHorizontal: 10,
-    marginVertical: 15,
+    marginVertical: 5,
   },
   title: {
     fontWeight: "bold",

@@ -144,7 +144,7 @@ export default function RegisterScreen() {
                 Yes, I'd like emails from Starbucks
               </AppText>
               <AppText style={styles.description}>
-                Know about product offers, announcements and initiatives.
+                Know about product offers, announcements{"\n"}and initiatives.
               </AppText>
             </View>
           </View>
@@ -168,8 +168,8 @@ export default function RegisterScreen() {
                 I'd like to use Biometric Unlock
               </AppText>
               <AppText style={styles.description}>
-                Use Biometric Unlock to sign in, authorize purchases, reloads,
-                transfers, and more.
+                Use Biometric Unlock to sign in, authorize purchases,{"\n"}
+                reloads, transfers, and more.
               </AppText>
             </View>
           </View>
@@ -192,8 +192,8 @@ export default function RegisterScreen() {
                 I accept the Terms of Use
               </AppText>
               <AppText style={styles.description}>
-                By joining, I agree to Starbucks® Rewards Terms, Starbucks Card
-                Terms, and the Application Terms.
+                By joining, I agree to Starbucks® Rewards Terms, {"\n"}
+                Starbucks Card Terms, and the Application Terms.
               </AppText>
             </View>
           </View>
@@ -211,6 +211,7 @@ export default function RegisterScreen() {
 
           <SubmitButton
             fontSize={14}
+            onPress={() => console.log(email, password, firstName, lastName)}
             position={{
               marginVertical: 10,
               position: "absolute",
@@ -233,6 +234,7 @@ const styles = StyleSheet.create({
   },
   description: {
     color: colors.medium,
+    fontSize: 12,
     marginLeft: 15,
     marginTop: 10,
   },

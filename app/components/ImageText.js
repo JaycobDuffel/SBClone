@@ -20,7 +20,7 @@ export default function ImageText({
       <AppButton
         fontSize={14}
         marginHorizontal={20}
-        marginBottom={25}
+        marginBottom={15}
         onPress={() => navigation.navigate("Register")}
         style={styles.button}
         textColor={colors.white}
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     borderLeftWidth: 0.1,
     borderBottomWidth: 0.1,
     elevation: 5,
-    marginBottom: 140,
+    marginBottom: 120,
   },
 });
 

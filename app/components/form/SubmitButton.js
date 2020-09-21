@@ -5,15 +5,14 @@ import { StyleSheet, View } from "react-native";
 import AppButton from "../AppButton";
 import colors from "../../configuration/colors";
 
-function SubmitButton({ fontSize, style, position, title }) {
-  const functions = useFormikContext();
+function SubmitButton({ fontSize, onPress, position, style, title }) {
   return (
     <View style={position}>
       <AppButton
         fontSize={fontSize}
         textColor={colors.white}
         title={title}
-        onPress={functions.handleSubmit}
+        onPress={onPress}
         style={style}
       />
     </View>
