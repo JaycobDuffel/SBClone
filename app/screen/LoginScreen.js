@@ -91,7 +91,11 @@ export default function LoginScreen() {
         <SubmitButton
           fontSize={14}
           style={styles.submit}
-          height={50}
+          position={{
+            position: "absolute",
+            bottom: -400,
+            right: 5,
+          }}
           title="Sign in"
         />
       </AppForm>
@@ -125,10 +129,10 @@ const styles = StyleSheet.create({
   submit: {
     backgroundColor: colors.dollarGreen,
     borderColor: colors.secondary,
-    borderRadius: 25,
+    borderRadius: 30,
     color: colors.white,
     elevation: 5,
     height: 50,
-    width: 100,
+    width: 105,
   },
 });

@@ -9,9 +9,7 @@ import AppText from "./AppText";
 import colors from "../configuration/colors";
 import { color } from "react-native-reanimated";
 
-export default function WelcomeRewards({ cards }) {
-  const navigation = useNavigation();
-
+export default function WelcomeRewards({ cards, navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.rewards}>
@@ -27,11 +25,10 @@ export default function WelcomeRewards({ cards }) {
       <AppButton
         backgroundColor={colors.white}
         fontSize={14}
-        onPress={() => console.log("poop!")}
         style={styles.button}
         textColor={colors.dark}
         title="Join now"
-        onPress={() => navigation.navigate("LoginScreen")}
+        onPress={() => navigation.navigate("Register")}
       />
     </View>
   );

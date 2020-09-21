@@ -45,7 +45,7 @@ export default function WelcomeScreen({ navigation }) {
           backgroundColor={colors.dollarGreen}
           borderRadius={25}
           height={45}
-          onPress={() => console.log("poop")}
+          onPress={() => navigation.navigate("Register")}
           textColor={colors.white}
           title="Join now"
           width={110}
