@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     height: 135,
     justifyContent: "flex-end",
     marginBottom: 20,
-    marginTop: -70,
+    marginTop: -130,
     paddingLeft: 10,
     paddingBottom: 20,
   },

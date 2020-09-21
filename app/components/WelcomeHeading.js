@@ -6,7 +6,7 @@ import AppHeading from "../components/AppHeading";
 import colors from "../configuration/colors";
 import HorizontalButton from "../components/HorizontalButton";
 
-export default function WelcomeHeading(props) {
+export default function WelcomeHeading({ navigation }) {
   return (
     <View style={styles.topContainer}>
       <AppHeading
@@ -18,7 +18,7 @@ export default function WelcomeHeading(props) {
       </AppHeading>
       <View style={styles.toolbar}>
         <View style={styles.horizontalButton}>
-          <TouchableOpacity onPress={() => console.log("logged in")}>
+          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
             <HorizontalButton
               color={colors.medium}
               name="login"
@@ -29,13 +29,13 @@ export default function WelcomeHeading(props) {
             <HorizontalButton
               color={colors.medium}
               name="email-outline"
-              onPress={() => console.log("log in")}
+              onPress={() => console.log("inbox")}
               text="Inbox"
             />
           </TouchableOpacity>
         </View>
         <View>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => console.log("settings")}>
             <MaterialCommunityIcons
               name="settings-outline"
               color={colors.medium}
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     elevation: 15,
     height: 290,
     marginBottom: 10,
-    marginTop: -35,
+    marginTop: -75,
     width: "100%",
   },
   heading: {

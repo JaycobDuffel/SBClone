@@ -6,28 +6,38 @@ import AppHeading from "./AppHeading";
 import AppText from "./AppText";
 import colors from "../configuration/colors";
 
-export default function ImageText({ heading, fontSize, numberOfLines, text }) {
+export default function ImageText({
+  heading,
+  fontSize,
+  navigation,
+  numberOfLines,
+  text,
+}) {
   return (
     <View style={styles.container}>
       <AppHeading fontSize={fontSize}>{heading}</AppHeading>
       <AppText numberOfLines={numberOfLines}>{text}</AppText>
       <AppButton
-        backgroundColor={colors.primary}
-        borderColor={colors.primary}
         fontSize={14}
         marginHorizontal={20}
         marginBottom={25}
-        onPress={() => console.log("poop!")}
+        onPress={() => navigation.navigate("Register")}
         style={styles.button}
         textColor={colors.white}
         title="Join now"
-        width={90}
       />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
+  button: {
+    backgroundColor: colors.primary,
+    borderColor: colors.primary,
+    height: 35,
+    marginHorizontal: 5,
+    width: 95,
+  },
   container: {
     backgroundColor: colors.white,
     paddingLeft: 5,

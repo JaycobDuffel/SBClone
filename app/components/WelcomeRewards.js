@@ -1,13 +1,17 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 import AppButton from "./AppButton";
 import AppCard from "./AppCard";
 import AppText from "./AppText";
 import colors from "../configuration/colors";
+import { color } from "react-native-reanimated";
 
 export default function WelcomeRewards({ cards }) {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
       <View style={styles.rewards}>
@@ -22,14 +26,12 @@ export default function WelcomeRewards({ cards }) {
       <AppCard cards={cards} />
       <AppButton
         backgroundColor={colors.white}
-        borderColor={colors.primary}
         fontSize={14}
-        marginHorizontal={25}
         onPress={() => console.log("poop!")}
         style={styles.button}
-        textColor={colors.medium}
+        textColor={colors.dark}
         title="Join now"
-        width={90}
+        onPress={() => navigation.navigate("LoginScreen")}
       />
     </View>
   );
@@ -37,7 +39,11 @@ export default function WelcomeRewards({ cards }) {
 
 const styles = StyleSheet.create({
   button: {
+    borderColor: colors.medium,
+    height: 35,
+    marginHorizontal: 15,
     marginVertical: 15,
+    width: 95,
   },
   container: {
     flexDirection: "column",

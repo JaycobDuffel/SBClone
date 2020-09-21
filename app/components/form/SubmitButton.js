@@ -27,7 +27,7 @@ function SubmitButton({ fontSize, style, title }) {
 const styles = StyleSheet.create({
   button: {
     position: "absolute",
-    bottom: -775,
+    bottom: -400,
     right: 5,
   },
 });

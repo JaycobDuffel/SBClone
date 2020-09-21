@@ -1,18 +1,16 @@
 import React from "react";
 import { Image, StyleSheet, View } from "react-native";
-import colors from "../configuration/colors";
-import AppHeading from "./AppHeading";
 
-import AppText from "./AppText";
 import ImageText from "./ImageText";
 
-export default function WelcomeBottom() {
+export default function WelcomeBottom({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.card}>
         <Image style={styles.image} source={require("../../assets/sb5.jpg")} />
         <ImageText
           numberOfLine={2}
+          navigation={navigation}
           fontSize={20}
           heading="Say hello to a new way to pay"
           text="Starbucks® Rewards members can now use cash, credit, or debit to earn
