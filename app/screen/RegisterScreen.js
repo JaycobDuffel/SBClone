@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
+  NativeModules,
+  Platform,
   ScrollView,
   StyleSheet,
   TextInput,
@@ -24,9 +26,6 @@ export default function RegisterScreen() {
   const [biometrics, setBiometrics] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [user, setUser] = useState({});
-  const [userId, setUserId] = useState();
-
-  
 
   const handleSubmit = async (user) => {
     const result = await Api.postUser(user);
@@ -58,7 +57,9 @@ export default function RegisterScreen() {
             autoCorrect={false}
             autoFocus
             keyboardType="default"
-            onChangeText={(text) => setFirstName(text)}
+            onChangeText={(text) => {
+              setFirstName(text), setUser({ ...user, firstname: text });
+            }}
             placeholderTextColor={colors.medium}
             placeholder="First name"
             style={styles.input}
@@ -67,7 +68,9 @@ export default function RegisterScreen() {
           <TextInput
             autoCapitalize="none"
             autoCorrect={false}
-            onChangeText={(text) => setLastName(text)}
+            onChangeText={(text) => {
+              setLastName(text), setUser({ ...user, lastname: text });
+            }}
             placeholderTextColor={colors.medium}
             placeholder="Last name"
             style={styles.input}
@@ -79,7 +82,9 @@ export default function RegisterScreen() {
             autoCapitalize="none"
             autoCorrect={false}
             keyboardType="email-address"
-            onChangeText={(text) => setEmail(text)}
+            onChangeText={(text) => {
+              setEmail(text), setUser({ ...user, email: text, id: text });
+            }}
             placeholderTextColor={colors.medium}
             placeholder="Email or username"
             style={styles.input}
@@ -88,7 +93,9 @@ export default function RegisterScreen() {
           <TextInput
             autoCapitalize="none"
             autoCorrect={false}
-            onChangeText={(text) => setPassword(text)}
+            onChangeText={(text) => {
+              setPassword(text), setUser({ ...user, password: text });
+            }}
             placeholderTextColor={colors.medium}
             placeholder="Password"
             secureTextEntry
@@ -201,20 +208,8 @@ export default function RegisterScreen() {
           <SubmitButton
             fontSize={14}
             onPress={() => {
-              if (userId === undefined) {
-                setUserId(1)
-              }
-              const id = userId.toString()
-              setUser({
-                id: id,
-                firstname: firstName,
-                lastname: lastName,
-                email: email
-              });
               console.log(user);
               handleSubmit(user);
-              
-              setUserId(userId + 1);
             }}
             position={{
               marginVertical: 10,

@@ -17,7 +17,6 @@ export default function LoginScreen() {
     return await Api.getUser(id);
   };
 
-  
   return (
     <Screen style={styles.container}>
       <View style={styles.heading}>
