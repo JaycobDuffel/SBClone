@@ -1,0 +1,22 @@
+import client from "./client";
+
+const endpoint = "/user/";
+
+const getUser = async (id) => {
+  const response = await client.get(endpoint + `/${id}`);
+  if (response.ok) {
+    const user = await response.data;
+    return user;
+  } else {
+    console.log(response.problem);
+  }
+};
+
+const postUser = (user) => {
+  return client.post(endpoint, user);
+};
+
+export default {
+  getUser,
+  postUser,
+};

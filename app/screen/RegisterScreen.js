@@ -1,19 +1,19 @@
-import React, { useState } from "react";
-import { StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
-import * as Yup from "yup";
+import React, { useEffect, useState } from "react";
+import {
+  ScrollView,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import CheckBox from "@react-native-community/checkbox";
 
-import { AppForm, SubmitButton } from "../components/form";
-import Screen from "../components/Screen";
-import colors from "../configuration/colors";
+import Api from "../api/users";
 import AppText from "../components/AppText";
-import { ScrollView } from "react-native";
-
-const validationSchema = Yup.object().shape({
-  email: Yup.string().required().email().label("Email"),
-  password: Yup.string().required().min(4).label("Password"),
-});
+import colors from "../configuration/colors";
+import Screen from "../components/Screen";
+import { AppForm, SubmitButton } from "../components/form";
 
 export default function RegisterScreen() {
   const [email, setEmail] = useState();
@@ -23,47 +23,32 @@ export default function RegisterScreen() {
   const [emails, setEmails] = useState(false);
   const [biometrics, setBiometrics] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
-  const handleSubmit = () => {
-    console.log("you did it");
-  };
+  const [user, setUser] = useState({});
+  const [userId, setUserId] = useState();
 
-  const users = [
-    {
-      email: "test@123.com",
-      username: "testing123",
-      password: "12345",
-    },
-    {
-      email: "test@1234.com",
-      username: "testing1234",
-      password: "12345",
-    },
-    {
-      email: "test@12345.com",
-      username: "testing12345",
-      password: "12345",
-    },
-  ];
+  
+
+  const handleSubmit = async (user) => {
+    const result = await Api.postUser(user);
+    if (!result.ok) return alert(result.problem);
+    return alert("Success");
+  };
 
   return (
     <Screen style={styles.container}>
-      <View style={styles.heading}>
-        <AppText
-          style={{
-            fontSize: 28,
-            fontWeight: "bold",
-          }}
-          color={colors.black}
-        >
-          Starbucks® Rewards
-        </AppText>
-      </View>
+      <AppForm>
+        <View style={styles.heading}>
+          <AppText
+            style={{
+              fontSize: 28,
+              fontWeight: "bold",
+            }}
+            color={colors.black}
+          >
+            Starbucks® Rewards
+          </AppText>
+        </View>
 
-      <AppForm
-        initialValues={{ email: "", password: "" }}
-        onSubmit={handleSubmit}
-        validationSchema={validationSchema}
-      >
         <ScrollView>
           <AppText style={[styles.text, { marginTop: 0 }]}>
             Personal Info
@@ -77,6 +62,7 @@ export default function RegisterScreen() {
             placeholderTextColor={colors.medium}
             placeholder="First name"
             style={styles.input}
+            value={firstName}
           />
           <TextInput
             autoCapitalize="none"
@@ -85,6 +71,7 @@ export default function RegisterScreen() {
             placeholderTextColor={colors.medium}
             placeholder="Last name"
             style={styles.input}
+            value={lastName}
           />
 
           <AppText style={styles.text}>Security</AppText>
@@ -96,6 +83,7 @@ export default function RegisterScreen() {
             placeholderTextColor={colors.medium}
             placeholder="Email or username"
             style={styles.input}
+            value={email}
           />
           <TextInput
             autoCapitalize="none"
@@ -105,6 +93,7 @@ export default function RegisterScreen() {
             placeholder="Password"
             secureTextEntry
             style={styles.input}
+            value={password}
           />
           <TouchableOpacity
             style={{
@@ -211,7 +200,22 @@ export default function RegisterScreen() {
 
           <SubmitButton
             fontSize={14}
-            onPress={() => console.log(email, password, firstName, lastName)}
+            onPress={() => {
+              if (userId === undefined) {
+                setUserId(1)
+              }
+              const id = userId.toString()
+              setUser({
+                id: id,
+                firstname: firstName,
+                lastname: lastName,
+                email: email
+              });
+              console.log(user);
+              handleSubmit(user);
+              
+              setUserId(userId + 1);
+            }}
             position={{
               marginVertical: 10,
               position: "absolute",

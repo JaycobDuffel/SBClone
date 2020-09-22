@@ -1,44 +1,23 @@
-import React, { useState } from "react";
-import { StyleSheet, View, TextInput, TouchableOpacity } from "react-native";
-import * as Yup from "yup";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, View, TextInput } from "react-native";
 
-import { AppForm, AppFormField, SubmitButton } from "../components/form";
-import Screen from "../components/Screen";
-import colors from "../configuration/colors";
+import Api from "../api/users";
 import AppText from "../components/AppText";
-import AppTextInput from "../components/AppTextInput";
 import AppButton from "../components/AppButton";
-
-const validationSchema = Yup.object().shape({
-  email: Yup.string().required().email().label("Email"),
-  password: Yup.string().required().min(4).label("Password"),
-});
+import colors from "../configuration/colors";
+import Screen from "../components/Screen";
+import { SubmitButton } from "../components/form";
 
 export default function LoginScreen() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const handleSubmit = () => {
-    console.log("you did it");
+  const [user, setUser] = useState([]);
+
+  const getCurrentUser = async (id) => {
+    return await Api.getUser(id);
   };
 
-  const users = [
-    {
-      email: "test@123.com",
-      username: "testing123",
-      password: "12345",
-    },
-    {
-      email: "test@1234.com",
-      username: "testing1234",
-      password: "12345",
-    },
-    {
-      email: "test@12345.com",
-      username: "testing12345",
-      password: "12345",
-    },
-  ];
-
+  
   return (
     <Screen style={styles.container}>
       <View style={styles.heading}>
@@ -53,52 +32,47 @@ export default function LoginScreen() {
         </AppText>
       </View>
 
-      <AppForm
-        initialValues={{ email: "", password: "" }}
-        onSubmit={handleSubmit}
-        validationSchema={validationSchema}
-      >
-        <TextInput
-          autoCapitalize="none"
-          autoCorrect={false}
-          keyboardType="email-address"
-          onChangeText={(text) => setEmail(text)}
-          placeholderTextColor={colors.medium}
-          placeholder="Email or username"
-          style={styles.input}
-        />
-        <TextInput
-          autoCapitalize="none"
-          autoCorrect={false}
-          onChangeText={(text) => setPassword(text)}
-          placeholderTextColor={colors.medium}
-          placeholder="Password"
-          secureTextEntry
-          style={styles.input}
-        />
-        <AppButton
-          fontSize={14}
-          style={styles.button}
-          textColor={colors.dollarGreen}
-          title="Forgot username?"
-        />
-        <AppButton
-          fontSize={14}
-          style={styles.button}
-          textColor={colors.dollarGreen}
-          title="Forgot password?"
-        />
-        <SubmitButton
-          fontSize={14}
-          style={styles.submit}
-          position={{
-            position: "absolute",
-            bottom: -400,
-            right: 5,
-          }}
-          title="Sign in"
-        />
-      </AppForm>
+      <TextInput
+        autoCapitalize="none"
+        autoCorrect={false}
+        keyboardType="email-address"
+        onChangeText={(text) => setEmail(text)}
+        placeholderTextColor={colors.medium}
+        placeholder="Email or username"
+        style={styles.input}
+      />
+      <TextInput
+        autoCapitalize="none"
+        autoCorrect={false}
+        onChangeText={(text) => setPassword(text)}
+        placeholderTextColor={colors.medium}
+        placeholder="Password"
+        secureTextEntry
+        style={styles.input}
+      />
+      <AppButton
+        fontSize={14}
+        style={styles.button}
+        textColor={colors.dollarGreen}
+        title="Forgot username?"
+      />
+      <AppButton
+        fontSize={14}
+        style={styles.button}
+        textColor={colors.dollarGreen}
+        title="Forgot password?"
+      />
+      <SubmitButton
+        fontSize={14}
+        onPress={() => console.log(user)}
+        position={{
+          position: "absolute",
+          bottom: -400,
+          right: 5,
+        }}
+        style={styles.submit}
+        title="Sign in"
+      />
     </Screen>
   );
 }
