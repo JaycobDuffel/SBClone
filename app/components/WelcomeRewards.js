@@ -1,13 +1,11 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
 
 import AppButton from "./AppButton";
 import AppCard from "./AppCard";
 import AppText from "./AppText";
 import colors from "../configuration/colors";
-import { color } from "react-native-reanimated";
 
 export default function WelcomeRewards({ cards, navigation }) {
   return (

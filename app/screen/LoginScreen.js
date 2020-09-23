@@ -1,22 +1,41 @@
-import React, { useEffect, useState } from "react";
-import { StyleSheet, View, TextInput } from "react-native";
+import React, { useContext, useState } from "react";
+import { StyleSheet, View, TextInput, Alert } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import Api from "../api/users";
+import Auth from "../auth/auth";
 import AppText from "../components/AppText";
 import AppButton from "../components/AppButton";
 import colors from "../configuration/colors";
 import Screen from "../components/Screen";
 import { SubmitButton } from "../components/form";
+import UserContext from "../Context/UserContext";
 
 export default function LoginScreen() {
+  const navigation = useNavigation();
+
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [user, setUser] = useState([]);
+
+  const userContext = useContext(UserContext);
 
   const getCurrentUser = async (id) => {
-    return await Api.getUser(id);
+    const result = await Api.getUser(id);
+    return result;
   };
 
+  const authorize = async () => {
+    const data = await getCurrentUser(email)
+    if (data.password === Auth.encode(password)) {
+      alert("You logged in");
+      userContext.setCurrentUser(data)
+      console.log(userContext.currentUser)
+      navigation.navigate("Welcome");
+    } else {
+      alert("Incorrect email/password combination")
+    }
+  }
+  
   return (
     <Screen style={styles.container}>
       <View style={styles.heading}>
@@ -63,7 +82,7 @@ export default function LoginScreen() {
       />
       <SubmitButton
         fontSize={14}
-        onPress={() => console.log(user)}
+        onPress={authorize}
         position={{
           position: "absolute",
           bottom: -400,

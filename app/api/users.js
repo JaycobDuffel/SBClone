@@ -3,13 +3,10 @@ import client from "./client";
 const endpoint = "/user/";
 
 const getUser = async (id) => {
-  const response = await client.get(endpoint + `/${id}`);
+  const response = await client.get(endpoint + `${id}`);
   if (response.ok) {
-    const user = await response.data;
-    return user;
-  } else {
-    console.log(response.problem);
-  }
+    return response.data;
+  } 
 };
 
 const postUser = (user) => {

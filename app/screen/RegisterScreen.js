@@ -10,14 +10,20 @@ import {
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import CheckBox from "@react-native-community/checkbox";
+import { useNavigation } from "@react-navigation/native";
+
 
 import Api from "../api/users";
+import Auth from "../auth/auth";
 import AppText from "../components/AppText";
 import colors from "../configuration/colors";
 import Screen from "../components/Screen";
 import { AppForm, SubmitButton } from "../components/form";
 
 export default function RegisterScreen() {
+  
+  const navigation = useNavigation();
+
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [firstName, setFirstName] = useState();
@@ -30,7 +36,9 @@ export default function RegisterScreen() {
   const handleSubmit = async (user) => {
     const result = await Api.postUser(user);
     if (!result.ok) return alert(result.problem);
+    navigation.navigate("Welcome")
     return alert("Success");
+    
   };
 
   return (
@@ -94,7 +102,7 @@ export default function RegisterScreen() {
             autoCapitalize="none"
             autoCorrect={false}
             onChangeText={(text) => {
-              setPassword(text), setUser({ ...user, password: text });
+              setPassword(text), setUser({ ...user, password: Auth.encode(text) });
             }}
             placeholderTextColor={colors.medium}
             placeholder="Password"
@@ -208,7 +216,6 @@ export default function RegisterScreen() {
           <SubmitButton
             fontSize={14}
             onPress={() => {
-              console.log(user);
               handleSubmit(user);
             }}
             position={{

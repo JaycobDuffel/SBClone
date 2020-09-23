@@ -1,13 +1,11 @@
-import React, { useContext } from "react";
+import React from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 
 import BottomButton from "../components/BottomButton";
-import colors from "../configuration/colors";
-import UserContext from "../Context/UserContext";
 import WelcomeBottom from "../components/WelcomeBottom";
-import WelcomeHeadingSI from "../components/WelcomeHeadingSI";
-import WelcomeHeadingSO from "../components/WelcomeHeadingSO";
+import WelcomeHeading from "../components/WelcomeHeading";
 import WelcomeRewards from "../components/WelcomeRewards";
+import colors from "../configuration/colors";
 
 const cards = [
   {
@@ -36,16 +34,10 @@ const cards = [
 ];
 
 export default function WelcomeScreen({ navigation }) {
-  const userContext = useContext(UserContext);
   return (
     <ScrollView>
       <View style={styles.container}>
-        {userContext.currentUser.firstname ? (
-          <WelcomeHeadingSI navigation={navigation} />
-        ) : (
-          <WelcomeHeadingSO navigation={navigation} />
-        )}
-
+        <WelcomeHeading navigation={navigation} />
         <WelcomeRewards cards={cards} navigation={navigation} />
         <WelcomeBottom navigation={navigation} />
         <BottomButton

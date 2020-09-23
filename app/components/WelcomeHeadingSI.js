@@ -1,43 +1,47 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-import AppHeading from "../components/AppHeading";
+import AppHeading from "./AppHeading";
 import colors from "../configuration/colors";
-import HorizontalButton from "../components/HorizontalButton";
+import HorizontalButton from "./HorizontalButton";
+import UserContext from "../Context/UserContext";
 
-export default function WelcomeHeading({ navigation }) {
+export default function WelcomeHeadingSI({ navigation }) {
+
+  const userContext = useContext(UserContext);
+
   return (
     <View style={styles.topContainer}>
       <AppHeading
         color={colors.black}
         style={styles.heading}
-        text="It's a great day for"
       >
-        It's a great day for {"     "}coffee ☕️
+        Hello {userContext.currentUser.firstname}, welcome back!
+        {console.log(userContext.currentUser.firstname)}
       </AppHeading>
       <View style={styles.toolbar}>
         <View style={styles.horizontalButton}>
-          <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+          <TouchableOpacity onPress={() => userContext.setCurrentUser({})}>
             <HorizontalButton
               color={colors.medium}
-              name="login"
-              text="Sign in"
+              name="logout"
+              text="Sign out"
             />
           </TouchableOpacity>
           <TouchableOpacity>
             <HorizontalButton
               color={colors.medium}
-              name="email-outline"
+              name="map-marker"
               onPress={() => console.log("inbox")}
-              text="Inbox"
+              text="Stores"
             />
           </TouchableOpacity>
         </View>
         <View>
           <TouchableOpacity onPress={() => console.log("settings")}>
             <MaterialCommunityIcons
-              name="settings-outline"
+              name="account"
               color={colors.medium}
               size={30}
               style={styles.icon}
