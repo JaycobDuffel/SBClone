@@ -28,13 +28,12 @@ export default function WelcomeHeadingSO({ navigation }) {
             <HorizontalButton
               color={colors.medium}
               name="email-outline"
-              onPress={() => console.log("inbox")}
               text="Inbox"
             />
           </TouchableOpacity>
         </View>
         <View>
-          <TouchableOpacity onPress={() => console.log("settings")}>
+          <TouchableOpacity >
             <MaterialCommunityIcons
               name="settings-outline"
               color={colors.medium}

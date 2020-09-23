@@ -29,7 +29,6 @@ export default function LoginScreen() {
     if (data.password === Auth.encode(password)) {
       alert("You logged in");
       userContext.setCurrentUser(data)
-      console.log(userContext.currentUser)
       navigation.navigate("Welcome");
     } else {
       alert("Incorrect email/password combination")

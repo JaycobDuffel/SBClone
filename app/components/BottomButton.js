@@ -3,27 +3,17 @@ import { StyleSheet, Text, TouchableOpacity } from "react-native";
 import colors from "../configuration/colors";
 
 export default function BottomButton({
-  backgroundColor = "primary",
-  borderColor = "secondary",
-  borderRadius,
   fontSize = 18,
-  height,
   onPress,
   textColor,
   title,
-  width = "100%",
+  style,
 }) {
   return (
     <TouchableOpacity
       style={[
         styles.button,
-        {
-          backgroundColor: backgroundColor,
-          height,
-          width,
-          borderColor: colors[borderColor],
-          borderRadius,
-        },
+        style
       ]}
       onPress={onPress}
     >
@@ -36,17 +26,17 @@ export default function BottomButton({
 
 const styles = StyleSheet.create({
   button: {
+    alignItems: "center",
     borderWidth: 1,
     borderRadius: 20,
+    bottom: 30,
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center",
+    marginHorizontal: 10,
+    marginVertical: 5,
     padding: 2,
     position: "absolute",
     right: 10,
-    bottom: 30,
-    marginHorizontal: 10,
-    marginVertical: 5,
   },
   title: {
     fontWeight: "bold",

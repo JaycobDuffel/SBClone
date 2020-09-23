@@ -8,7 +8,7 @@ import WelcomeBottomSI from "../components/WelcomeBottomSI";
 import WelcomeBottomSO from "../components/WelcomeBottomSO";
 import WelcomeHeadingSI from "../components/WelcomeHeadingSI";
 import WelcomeHeadingSO from "../components/WelcomeHeadingSO";
-import WelcomeRewardsSI from "../components/WelcomeRewardsSI";
+import WelcomeRewardsSI from "../components/WelcomeSI";
 import WelcomeRewardsSO from "../components/WelcomeRewardsSO";
 
 const cards = [
@@ -44,36 +44,46 @@ export default function WelcomeScreen({ navigation }) {
       <View style={styles.container}>
         {userContext.currentUser.firstname ? (
           <View>
-          <WelcomeHeadingSI navigation={navigation} />
-          <WelcomeRewardsSI navigation={navigation} />
-          <WelcomeBottomSI  />
-          <BottomButton
-            backgroundColor={colors.dollarGreen}
-            borderRadius={25}
-            height={50}
-            onPress={() => navigation.navigate("Register")}
-            textColor={colors.white}
-            title="Scan in store"
-            width={140}
-          />
+            <WelcomeHeadingSI navigation={navigation} />
+            <WelcomeRewardsSI navigation={navigation} />
+            <WelcomeBottomSI />
+            <BottomButton
+              onPress={() => navigation.navigate("Scan")}
+              style={{
+                backgroundColor: colors.dollarGreen,
+                borderColor: colors.dollarGreen,
+                borderRadius: 25,
+                bottom: 30,
+                height: 50,
+                marginTop: 20,
+                right: 10,
+                width: 140,
+              }}
+              textColor={colors.white}
+              title="Scan in store"
+              width={140}
+            />
           </View>
         ) : (
           <View>
-          <WelcomeHeadingSO navigation={navigation} />
-          <WelcomeRewardsSO cards={cards} navigation={navigation} />
-          <WelcomeBottomSO navigation={navigation} />
-          <BottomButton
-            backgroundColor={colors.dollarGreen}
-            borderRadius={25}
-            height={45}
-            onPress={() => navigation.navigate("Register")}
-            textColor={colors.white}
-            title="Join now"
-            width={110}
-          />
+            <WelcomeHeadingSO navigation={navigation} />
+            <WelcomeRewardsSO cards={cards} navigation={navigation} />
+            <WelcomeBottomSO navigation={navigation} />
+            <BottomButton
+              height={45}
+              onPress={() => navigation.navigate("Register")}
+              style={{
+                backgroundColor: colors.dollarGreen,
+                borderColor: colors.dollarGreen,
+                borderRadius: 25,
+                height: 45,
+                width: 110,
+              }}
+              textColor={colors.white}
+              title="Join now"
+            />
           </View>
         )}
-
       </View>
     </ScrollView>
   );

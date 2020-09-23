@@ -3,16 +3,15 @@ import { Image, StyleSheet, View } from "react-native";
 
 import ImageText from "./ImageText";
 
-export default function InfoCard({ heading, imageUri, text }) {
-  console.log(imageUri)
+export default function InfoCard({ heading, imageUri, marginBottom = 30, text }) {
   return (
     <View style={styles.card}>
-      <Image style={styles.image} source={{uri: imageUri}} />
+      <Image style={styles.image} source={imageUri} />
       <ImageText
         numberOfLine={2}
         fontSize={20}
         heading={heading}
-        style={{marginBottom: 30}}
+        style={{marginBottom: marginBottom,}}
         textStyle={{fontSize: 16}}
         text={text}
         title="Learn more"

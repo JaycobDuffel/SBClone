@@ -18,7 +18,6 @@ export default function WelcomeHeadingSI({ navigation }) {
         style={styles.heading}
       >
         Hello {userContext.currentUser.firstname}, welcome back!
-        {console.log(userContext.currentUser.firstname)}
       </AppHeading>
       <View style={styles.toolbar}>
         <View style={styles.horizontalButton}>
@@ -33,13 +32,12 @@ export default function WelcomeHeadingSI({ navigation }) {
             <HorizontalButton
               color={colors.medium}
               name="map-marker"
-              onPress={() => console.log("inbox")}
               text="Stores"
             />
           </TouchableOpacity>
         </View>
         <View>
-          <TouchableOpacity onPress={() => console.log("settings")}>
+          <TouchableOpacity >
             <MaterialCommunityIcons
               name="account"
               color={colors.medium}
