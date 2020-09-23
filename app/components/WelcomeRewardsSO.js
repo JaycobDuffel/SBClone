@@ -7,7 +7,7 @@ import AppCard from "./AppCard";
 import AppText from "./AppText";
 import colors from "../configuration/colors";
 
-export default function WelcomeRewards({ cards, navigation }) {
+export default function WelcomeRewardsSO({ cards, navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.rewards}>

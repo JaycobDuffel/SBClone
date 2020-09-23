@@ -9,22 +9,29 @@ import colors from "../configuration/colors";
 export default function ImageText({
   heading,
   fontSize,
-  navigation,
   numberOfLines,
+  onPress,
+  style,
+  textStyle,
   text,
+  title,
 }) {
   return (
-    <View style={styles.container}>
-      <AppHeading fontSize={fontSize}>{heading}</AppHeading>
-      <AppText numberOfLines={numberOfLines}>{text}</AppText>
+    <View style={[styles.container, style]}>
+      <AppHeading style={styles.heading} fontSize={fontSize}>
+        {heading}
+      </AppHeading>
+      <AppText style={[styles.text, textStyle]} numberOfLines={numberOfLines}>
+        {text}
+      </AppText>
       <AppButton
         fontSize={14}
         marginHorizontal={20}
         marginBottom={15}
-        onPress={() => navigation.navigate("Register")}
-        style={styles.button}
+        onPress={onPress}
+        style={[styles.button, style]}
         textColor={colors.white}
-        title="Join now"
+        title={title}
       />
     </View>
   );
@@ -42,7 +49,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.white,
     paddingLeft: 5,
     marginTop: -7,
-    height: 220,
+    height: 240,
     width: 390,
     borderRightColor: colors.medium,
     borderLeftColor: colors.medium,
@@ -52,6 +59,14 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0.1,
     elevation: 5,
     marginBottom: 120,
+  },
+  heading: {
+    marginTop: -15,
+    marginLeft: 5,
+  },
+  text: {
+    marginTop: 20,
+    marginLeft: 5,
   },
 });
 

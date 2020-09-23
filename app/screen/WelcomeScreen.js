@@ -4,10 +4,12 @@ import { ScrollView, StyleSheet, View } from "react-native";
 import BottomButton from "../components/BottomButton";
 import colors from "../configuration/colors";
 import UserContext from "../Context/UserContext";
-import WelcomeBottom from "../components/WelcomeBottom";
+import WelcomeBottomSI from "../components/WelcomeBottomSI";
+import WelcomeBottomSO from "../components/WelcomeBottomSO";
 import WelcomeHeadingSI from "../components/WelcomeHeadingSI";
 import WelcomeHeadingSO from "../components/WelcomeHeadingSO";
-import WelcomeRewards from "../components/WelcomeRewards";
+import WelcomeRewardsSI from "../components/WelcomeRewardsSI";
+import WelcomeRewardsSO from "../components/WelcomeRewardsSO";
 
 const cards = [
   {
@@ -41,22 +43,37 @@ export default function WelcomeScreen({ navigation }) {
     <ScrollView>
       <View style={styles.container}>
         {userContext.currentUser.firstname ? (
+          <View>
           <WelcomeHeadingSI navigation={navigation} />
+          <WelcomeRewardsSI navigation={navigation} />
+          <WelcomeBottomSI  />
+          <BottomButton
+            backgroundColor={colors.dollarGreen}
+            borderRadius={25}
+            height={50}
+            onPress={() => navigation.navigate("Register")}
+            textColor={colors.white}
+            title="Scan in store"
+            width={140}
+          />
+          </View>
         ) : (
+          <View>
           <WelcomeHeadingSO navigation={navigation} />
+          <WelcomeRewardsSO cards={cards} navigation={navigation} />
+          <WelcomeBottomSO navigation={navigation} />
+          <BottomButton
+            backgroundColor={colors.dollarGreen}
+            borderRadius={25}
+            height={45}
+            onPress={() => navigation.navigate("Register")}
+            textColor={colors.white}
+            title="Join now"
+            width={110}
+          />
+          </View>
         )}
 
-        <WelcomeRewards cards={cards} navigation={navigation} />
-        <WelcomeBottom navigation={navigation} />
-        <BottomButton
-          backgroundColor={colors.dollarGreen}
-          borderRadius={25}
-          height={45}
-          onPress={() => navigation.navigate("Register")}
-          textColor={colors.white}
-          title="Join now"
-          width={110}
-        />
       </View>
     </ScrollView>
   );
