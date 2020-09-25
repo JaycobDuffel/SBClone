@@ -8,15 +8,11 @@ import HorizontalButton from "./HorizontalButton";
 import UserContext from "../Context/UserContext";
 
 export default function WelcomeHeadingSI({ navigation }) {
-
   const userContext = useContext(UserContext);
 
   return (
     <View style={styles.topContainer}>
-      <AppHeading
-        color={colors.black}
-        style={styles.heading}
-      >
+      <AppHeading color={colors.black} style={styles.heading}>
         Hello {userContext.currentUser.firstname}, welcome back!
       </AppHeading>
       <View style={styles.toolbar}>
@@ -37,7 +33,7 @@ export default function WelcomeHeadingSI({ navigation }) {
           </TouchableOpacity>
         </View>
         <View>
-          <TouchableOpacity >
+          <TouchableOpacity>
             <MaterialCommunityIcons
               name="account"
               color={colors.medium}
@@ -61,6 +57,7 @@ const styles = StyleSheet.create({
     width: "100%",
   },
   heading: {
+    paddingHorizontal: 10,
     marginLeft: 15,
     marginTop: 100,
   },

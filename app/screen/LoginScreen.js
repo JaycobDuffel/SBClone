@@ -25,16 +25,16 @@ export default function LoginScreen() {
   };
 
   const authorize = async () => {
-    const data = await getCurrentUser(email)
+    const data = await getCurrentUser(email);
     if (data.password === Auth.encode(password)) {
       alert("You logged in");
-      userContext.setCurrentUser(data)
+      userContext.setCurrentUser(data);
       navigation.navigate("Welcome");
     } else {
-      alert("Incorrect email/password combination")
+      alert("Incorrect email/password combination");
     }
-  }
-  
+  };
+
   return (
     <Screen style={styles.container}>
       <View style={styles.heading}>
@@ -53,7 +53,7 @@ export default function LoginScreen() {
         autoCapitalize="none"
         autoCorrect={false}
         keyboardType="email-address"
-        onChangeText={(text) => setEmail(text)}
+        onChangeText={(text) => setEmail(text.toLowerCase())}
         placeholderTextColor={colors.medium}
         placeholder="Email or username"
         style={styles.input}

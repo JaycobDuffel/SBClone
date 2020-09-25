@@ -12,7 +12,6 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import CheckBox from "@react-native-community/checkbox";
 import { useNavigation } from "@react-navigation/native";
 
-
 import Api from "../api/users";
 import Auth from "../auth/auth";
 import AppText from "../components/AppText";
@@ -21,7 +20,6 @@ import Screen from "../components/Screen";
 import { AppForm, SubmitButton } from "../components/form";
 
 export default function RegisterScreen() {
-  
   const navigation = useNavigation();
 
   const [email, setEmail] = useState();
@@ -36,9 +34,8 @@ export default function RegisterScreen() {
   const handleSubmit = async (user) => {
     const result = await Api.postUser(user);
     if (!result.ok) return alert(result.problem);
-    navigation.navigate("Welcome")
+    navigation.navigate("Welcome");
     return alert("Success");
-    
   };
 
   return (
@@ -61,7 +58,7 @@ export default function RegisterScreen() {
             Personal Info
           </AppText>
           <TextInput
-            autoCapitalize="none"
+            autoCapitalize
             autoCorrect={false}
             autoFocus
             keyboardType="default"
@@ -74,7 +71,7 @@ export default function RegisterScreen() {
             value={firstName}
           />
           <TextInput
-            autoCapitalize="none"
+            autoCapitalize
             autoCorrect={false}
             onChangeText={(text) => {
               setLastName(text), setUser({ ...user, lastname: text });
@@ -91,7 +88,12 @@ export default function RegisterScreen() {
             autoCorrect={false}
             keyboardType="email-address"
             onChangeText={(text) => {
-              setEmail(text), setUser({ ...user, email: text, id: text });
+              setEmail(text),
+                setUser({
+                  ...user,
+                  email: text.toLowerCase(),
+                  id: text.toLowerCase(),
+                });
             }}
             placeholderTextColor={colors.medium}
             placeholder="Email or username"
@@ -102,7 +104,8 @@ export default function RegisterScreen() {
             autoCapitalize="none"
             autoCorrect={false}
             onChangeText={(text) => {
-              setPassword(text), setUser({ ...user, password: Auth.encode(text) });
+              setPassword(text),
+                setUser({ ...user, password: Auth.encode(text) });
             }}
             placeholderTextColor={colors.medium}
             placeholder="Password"
